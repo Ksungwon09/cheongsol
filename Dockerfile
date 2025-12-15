@@ -1,6 +1,10 @@
 # Stage 1: Build the React application
 FROM node:18-alpine AS build
 
+# Set build-time argument and environment variable
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 WORKDIR /app
 
 COPY package.json ./
