@@ -1,0 +1,94 @@
+.map-booths-container {
+    padding: 20px;
+}
+
+.map-booths-container h1, .map-booths-container h2 {
+    color: #e0e0e0; /* Light text for dark background */
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.map-pdf {
+    width: 100%;
+    height: 80vh; /* 80% of the viewport height */
+    border: none; /* Removes the default iframe border */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.sort-options {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.sort-options strong {
+    color: #e0e0e0; /* Light text */
+    margin-right: 10px;
+}
+
+.sort-button {
+    padding: 8px 12px;
+    margin-right: 10px;
+    background-color: #3e4a59; /* Darker background for inactive buttons */
+    color: #e0e0e0; /* Light text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.sort-button:hover {
+    background-color: #5a6d80; /* Slightly lighter on hover */
+}
+
+.sort-button-active {
+    background-color: #4B89DC; /* Accent blue for active button */
+    color: white;
+    padding: 8px 12px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sort-button-active:hover {
+    background-color: #3a7ac8; /* Darker blue on hover */
+}
+
+.booth-list-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.booth-item {
+    background: #2a2a40; /* Dark background for list items */
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Darker shadow for dark theme */
+    color: #e0e0e0; /* Light text */
+}
+
+.booth-item h3 {
+    margin-top: 0;
+    color: #4B89DC; /* Accent color for booth names */
+}
+
+.booth-item p {
+    margin-bottom: 5px;
+}
+
+.booth-item p strong {
+    color: #bbbbbb; /* Slightly lighter for labels */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .map-booths-container {
+        padding: 15px;
+    }
+    .sort-button, .sort-button-active {
+        margin-bottom: 10px;
+    }
+}

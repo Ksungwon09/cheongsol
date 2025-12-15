@@ -1,0 +1,17 @@
+.schedule-container {
+    padding: 20px;
+}
+
+.schedule-container h1 {
+    color: #e0e0e0; /* Light text for dark background */
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.program-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}

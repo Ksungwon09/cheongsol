@@ -1,0 +1,169 @@
+.navbar {
+  background: #2c3e50; /* Modern dark background */
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  z-index: 1;
+  width: 100%;
+  padding: 0 24px;
+  max-width: 1100px;
+}
+
+.navbar-logo {
+  color: #fff;
+  justify-self: flex-start;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  height: 80px;
+}
+
+.nav-links {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+}
+
+.nav-links:hover {
+  border-bottom: 3px solid #4B89DC;
+  transition: all 0.2s ease-out;
+}
+
+.nav-logout-btn-desktop,
+.nav-login-btn-desktop {
+  background-color: #4B89DC; /* Accent blue */
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 20px;
+  display: block; /* Default to block for desktop */
+  text-decoration: none; /* For Link component */
+}
+
+.nav-logout-btn-desktop:hover,
+.nav-login-btn-desktop:hover {
+  background-color: #3a7ac8; /* Darker blue */
+}
+
+.menu-icon {
+  display: none; /* Hidden by default for desktop */
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.nav-logout-btn-mobile,
+.nav-login-btn-mobile {
+  display: none; /* Hidden by default, shown in mobile menu */
+}
+
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    padding: 0 15px; /* Adjust padding for smaller screens */
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 90vh; /* Take full height below navbar */
+    position: absolute;
+    top: 80px;
+    left: -100%; /* Hidden by default */
+    opacity: 1;
+    transition: all 0.5s ease;
+    background: #2c3e50; /* Modern dark background */
+    visibility: hidden; /* Hide the element completely */
+    padding: 0; /* Remove default padding */
+  }
+
+  .nav-menu.active {
+    left: 0; /* Slide in from left */
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 998; /* Below navbar */
+    visibility: visible; /* Show the element */
+  }
+
+  .nav-item {
+    width: 100%;
+    height: auto; /* Allow items to take natural height */
+  }
+
+  .nav-links {
+    padding: 2rem;
+    width: 100%;
+    display: table;
+    text-align: center; /* Center links in mobile menu */
+  }
+
+  .nav-links:hover {
+    background-color: #4B89DC; /* Highlight on hover */
+    border-bottom: none; /* Remove desktop hover effect */
+  }
+
+  .menu-icon {
+    display: block; /* Show hamburger icon on mobile */
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 60%);
+  }
+
+  .nav-logout-btn-desktop,
+  .nav-login-btn-desktop {
+    display: none; /* Hide desktop logout button on mobile */
+  }
+
+  .nav-logout-btn-mobile,
+  .nav-login-btn-mobile {
+    display: block; /* Show mobile logout button in menu */
+    width: 100%;
+    padding: 0;
+  }
+  
+  .nav-logout-btn-mobile .nav-links, /* Target button inside li */
+  .nav-login-btn-mobile .nav-links { /* Target Link inside li */
+    background-color: #4B89DC;
+    color: white;
+    margin: 20px auto;
+    border-radius: 4px;
+    width: calc(100% - 4rem); /* Match padding */
+  }
+
+}

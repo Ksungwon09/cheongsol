@@ -1,0 +1,130 @@
+.home-container {
+    text-align: center;
+}
+
+.poster-container {
+    position: relative;
+    display: inline-block; /* Aligns the container properly */
+}
+
+.poster-container img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.poster-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    transform: none;
+    color: white;
+    text-align: left;
+    width: 90%;
+    /* Added for tighter spacing */
+    line-height: 1.1; 
+}
+
+.title-container {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.poster-text .main-title {
+    font-size: 2.5rem; /* Increased */
+    font-weight: normal;
+    color: #E0E0E0;
+    text-shadow: 0 0 5px #FFFFFF, 0 0 10px #00BFFF;
+    margin: 0;
+    line-height: 1.1; /* Tighter spacing */
+}
+
+.poster-text .subtitle {
+    font-size: 1.8rem; /* Increased */
+    color: #E0E0E0;
+    text-shadow: 0 0 5px #FFFFFF, 0 0 10px #00BFFF, 0 0 15px #00BFFF;
+    margin: 0;
+    line-height: 1.1; /* Tighter spacing */
+}
+
+.poster-text .date {
+    font-size: 2.8rem; /* Increased */
+    color: #FFFFFF;
+    text-shadow: 0 0 8px #FFFFFF, 0 0 15px #00BFFF, 0 0 20px #00BFFF;
+    margin: 5px 0; /* Minimal margin */
+    line-height: 1.1; /* Tighter spacing */
+}
+
+.poster-text .school {
+    font-size: 1.4rem; /* Increased */
+    color: #A9A9A9;
+    margin: 0;
+    line-height: 1.1; /* Tighter spacing */
+}
+
+.home-login-btn {
+    display: inline-block;
+    background-color: #4B89DC; /* Accent blue */
+    color: white;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.home-login-btn:hover {
+    background-color: #3a7ac8; /* Darker blue */
+}
+
+@media screen and (max-width: 768px) {
+    .poster-text {
+        bottom: 15px;
+        left: 15px;
+    }
+    .poster-text .main-title {
+        font-size: 2.2rem; /* Increased */
+    }
+    .poster-text .subtitle {
+        font-size: 1.6rem; /* Increased */
+    }
+    .poster-text .date {
+        font-size: 2.5rem; /* Increased */
+    }
+    .poster-text .school {
+        font-size: 1.2rem; /* Increased */
+    }
+    .home-login-btn {
+        padding: 8px 15px;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .poster-text {
+        bottom: 10px;
+        left: 10px;
+    }
+    .poster-text .main-title {
+        font-size: 1.8rem; /* Increased */
+    }
+    .poster-text .subtitle {
+        font-size: 1.3rem; /* Increased */
+    }
+    .poster-text .date {
+        font-size: 2.2rem; /* Increased */
+    }
+    .poster-text .school {
+        font-size: 1rem; /* Increased */
+    }
+    .home-login-btn {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+}

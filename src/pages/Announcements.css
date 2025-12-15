@@ -1,0 +1,43 @@
+.announcements-container {
+    padding: 20px;
+}
+
+.announcements-container h1 {
+    color: #e0e0e0; /* Light text for dark background */
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.announcement-item {
+    background: #2a2a40; /* Dark background for list items */
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Darker shadow for dark theme */
+    color: #e0e0e0; /* Light text */
+}
+
+.announcement-item h3 {
+    margin-top: 0;
+    color: #4B89DC; /* Accent color for announcement titles */
+    margin-bottom: 10px;
+}
+
+.announcement-item p {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.announcement-date {
+    font-size: 0.8em;
+    color: #bbbbbb; /* Lighter muted color */
+    text-align: right;
+    margin-top: 10px;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .announcements-container {
+        padding: 15px;
+    }
+}
