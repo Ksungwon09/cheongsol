@@ -28,6 +28,12 @@ app.use('/api/booths', boothRoutes);
 const suggestionRoutes = require('./routes/suggestions');
 app.use('/api/suggestions', suggestionRoutes);
 
+const scheduleImageRoutes = require('./routes/schedule_images');
+app.use('/api/schedule-images', scheduleImageRoutes);
+
+// Serve uploaded files
+app.use('/uploads', express.static('uploads'));
+
 
 const startServer = async () => {
   await createTables(); // Wait for DB setup to complete

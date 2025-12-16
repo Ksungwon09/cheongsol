@@ -6,6 +6,9 @@ import {
 import {
   getSuggestions, updateSuggestionStatus
 } from '../services/suggestionService';
+import {
+  getScheduleImages, uploadScheduleImage, deleteScheduleImage
+} from '../services/scheduleService';
 import './Admin.css';
 
 const Admin = () => {
@@ -15,6 +18,8 @@ const Admin = () => {
   const [booths, setBooths] = useState([]);
   const [newBooth, setNewBooth] = useState({ name: '', category: '', description: '' });
   const [suggestions, setSuggestions] = useState([]);
+  const [scheduleImages, setScheduleImages] = useState([]);
+  const [newScheduleImageFile, setNewScheduleImageFile] = useState(null);
 
   // Fetch all data
   const fetchAdminData = async () => {
@@ -22,6 +27,7 @@ const Admin = () => {
       setAnnouncements(await getAnnouncements());
       setBooths(await getBooths());
       setSuggestions(await getSuggestions());
+      setScheduleImages(await getScheduleImages());
     } catch (error) {
       console.error("Failed to fetch admin data", error);
       // Maybe set an error state here to show in the UI
@@ -66,6 +72,24 @@ const Admin = () => {
     fetchAdminData();
   };
 
+  // --- Handlers for Schedule Images ---
+  const handleAddScheduleImage = async (e) => {
+    e.preventDefault();
+    if (!newScheduleImageFile) return;
+    const formData = new FormData();
+    formData.append('image', newScheduleImageFile);
+    await uploadScheduleImage(formData);
+    setNewScheduleImageFile(null);
+    fetchAdminData();
+  };
+
+  const handleDeleteScheduleImage = async (id) => {
+    await deleteScheduleImage(id);
+    fetchAdminData();
+  };
+
+  const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
   return (
     <div className="admin-container">
       <h1>관리자 페이지</h1>
@@ -103,6 +127,23 @@ const Admin = () => {
             <div key={booth.id} className="admin-item">
               <span>{booth.name}</span>
               <button onClick={() => handleDeleteBooth(booth.id)} className="delete-btn">삭제</button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Schedule Image Management */}
+      <div className="admin-section">
+        <h2>공연 안내 이미지 관리</h2>
+        <form onSubmit={handleAddScheduleImage} className="admin-form">
+          <input type="file" onChange={(e) => setNewScheduleImageFile(e.target.files[0])} />
+          <button type="submit" className="add-btn">이미지 추가</button>
+        </form>
+        <div className="admin-item-list">
+          {scheduleImages.map(image => (
+            <div key={image.id} className="admin-item">
+              <img src={`${API_BASE_URL}${image.image_url}`} alt="Schedule" style={{ width: '100px' }} />
+              <button onClick={() => handleDeleteScheduleImage(image.id)} className="delete-btn">삭제</button>
             </div>
           ))}
         </div>

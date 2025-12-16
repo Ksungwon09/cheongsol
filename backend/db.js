@@ -85,6 +85,14 @@ const createTables = async () => {
       );
     `;
 
+    const scheduleImagesTable = `
+      CREATE TABLE IF NOT EXISTS schedule_images (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        image_url VARCHAR(255) NOT NULL,
+        createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `;
+
     await pool.query(usersTable);
     console.log("Table 'users' created or already exists.");
     // Now, check and add the username column if it's missing
@@ -93,6 +101,7 @@ const createTables = async () => {
     await pool.query(announcementsTable);
     await pool.query(boothsTable);
     await pool.query(suggestionsTable);
+    await pool.query(scheduleImagesTable);
     console.log("Other tables created or already exist.");
 
   } catch (error) {
