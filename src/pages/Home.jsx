@@ -13,7 +13,7 @@ const Home = () => {
 
       <div className="poster-container">
         <img
-          src="/festival_poster_main.JPEG"
+          src="/home_poster.jpg"
           alt="축제 포스터"
         />
         <div className="poster-text">
