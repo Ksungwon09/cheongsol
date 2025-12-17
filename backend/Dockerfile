@@ -13,6 +13,9 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+# [추가됨] 이미지 업로드 폴더 생성
+RUN mkdir -p uploads
+
 # Your app binds to port 3001
 EXPOSE 3001
 
