@@ -9,9 +9,14 @@ import {
 import {
   getScheduleImages, uploadScheduleImage, deleteScheduleImage
 } from '../services/scheduleService';
+import userService from '../services/userService';
+import { useAuth } from '../hooks/useAuth';
 import './Admin.css';
 
 const Admin = () => {
+  // Auth
+  const { user } = useAuth();
+
   // State
   const [announcements, setAnnouncements] = useState([]);
   const [newAnnouncement, setNewAnnouncement] = useState({ title: '', content: '', isPopup: false });
@@ -20,6 +25,8 @@ const Admin = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [scheduleImages, setScheduleImages] = useState([]);
   const [newScheduleImageFile, setNewScheduleImageFile] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [userStats, setUserStats] = useState({ today_connections: 0, current_connections: 0 });
 
   // Fetch all data
   const fetchAdminData = async () => {
@@ -28,6 +35,10 @@ const Admin = () => {
       setBooths(await getBooths());
       setSuggestions(await getSuggestions());
       setScheduleImages(await getScheduleImages());
+      const usersResponse = await userService.getUsers();
+      setUsers(usersResponse.data);
+      const statsResponse = await userService.getUserStats();
+      setUserStats(statsResponse.data);
     } catch (error) {
       console.error("Failed to fetch admin data", error);
       // Maybe set an error state here to show in the UI
@@ -88,11 +99,68 @@ const Admin = () => {
     fetchAdminData();
   };
 
+  // --- Handlers for Users ---
+  const handleDeleteUser = async (userId) => {
+    if (window.confirm('정말로 이 사용자를 삭제하시겠습니까?')) {
+      await userService.deleteUser(userId);
+      fetchAdminData();
+    }
+  };
+
+  const handleMakeAdmin = async (userId) => {
+    if (window.confirm('정말로 이 사용자에게 관리자 권한을 부여하시겠습니까?')) {
+      await userService.makeAdmin(userId);
+      fetchAdminData();
+    }
+  };
+
   const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
   return (
     <div className="admin-container">
       <h1>관리자 페이지</h1>
+
+      {/* User Management */}
+      <div className="admin-section">
+        <h2>사용자 관리</h2>
+        <div className="user-stats">
+          <p>오늘 접속자 수: {userStats.today_connections}</p>
+          <p>현재 접속자 수: {userStats.current_connections}</p>
+        </div>
+        <div className="admin-item-list user-list">
+          <div className="admin-item user-header">
+            <span>사용자명</span>
+            <span>이메일</span>
+            <span>관리자</span>
+            <span>작업</span>
+          </div>
+          {users.map(u => (
+            <div key={u.id} className="admin-item">
+              <span>{u.username}</span>
+              <span>{u.email}</span>
+              <span>{u.isAdmin ? 'Yes' : 'No'}</span>
+              <div className="user-actions">
+                <button 
+                  onClick={() => handleDeleteUser(u.id)} 
+                  className="delete-btn"
+                  disabled={user && user.userId === u.id}
+                >
+                  삭제
+                </button>
+                {!u.isAdmin && (
+                  <button 
+                    onClick={() => handleMakeAdmin(u.id)} 
+                    className="status-btn"
+                    disabled={user && user.userId === u.id}
+                  >
+                    관리자 지정
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Announcements Management */}
       <div className="admin-section">

@@ -31,6 +31,9 @@ app.use('/api/suggestions', suggestionRoutes);
 const scheduleImageRoutes = require('./routes/schedule_images');
 app.use('/api/schedule-images', scheduleImageRoutes);
 
+const userRoutes = require('./routes/users');
+app.use('/api/users', userRoutes);
+
 // Serve uploaded files
 app.use('/uploads', express.static('uploads'));
 

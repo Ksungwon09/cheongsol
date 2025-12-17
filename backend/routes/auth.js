@@ -17,23 +17,6 @@ router.post('/signup', async (req, res) => {
   }
 
   try {
-    // EMERGENCY FIX: Check for and create the column right before insert.
-    try {
-        const dbName = process.env.DB_NAME || 'cheongsol_db';
-        const checkColumnSql = `SELECT COUNT(*) AS count FROM information_schema.columns WHERE table_schema = ? AND table_name = 'users' AND column_name = 'username'`;
-        const [rows] = await pool.query(checkColumnSql, [dbName]);
-        if (rows[0].count === 0) {
-            console.log("EMERGENCY FIX: 'username' column not found. Altering table...");
-            const alterTableSql = `ALTER TABLE users ADD COLUMN username VARCHAR(255) NOT NULL UNIQUE AFTER id`;
-            await pool.query(alterTableSql);
-            console.log("EMERGENCY FIX: Table 'users' altered successfully.");
-            // Try to drop unique index on email, but don't fail if it doesn't exist.
-            try { await pool.query(`ALTER TABLE users DROP INDEX email`); } catch (e) { /* ignore */ }
-        }
-    } catch (alterError) {
-         console.error("EMERGENCY FIX: Failed to alter table:", alterError);
-    }
-
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     console.log('[Signup] Hashed password created for user:', username);
 
@@ -75,6 +58,9 @@ router.post('/login', async (req, res) => {
       console.log('[Login] Password does not match.');
       return res.status(401).json({ message: 'Invalid credentials.' });
     }
+
+    // Update last_login timestamp
+    await pool.query('UPDATE users SET last_login = NOW() WHERE id = ?', [user.id]);
 
     console.log('[Login] Login successful. Generating token.');
     const tokenPayload = {
